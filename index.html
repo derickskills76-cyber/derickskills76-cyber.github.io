@@ -110,6 +110,49 @@
             font-weight: 600;
         }
 
+        /* ---------- WHATSAPP BUTTON STYLES ---------- */
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+            color: #fff;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transition: 0.3s;
+            z-index: 999;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+            color: #fff;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
         /* ---------- HEADER / NAV ---------- */
         header {
             position: fixed;
@@ -530,6 +573,12 @@
         .contact-detail a:hover {
             color: #7b2ffc;
         }
+        .contact-detail .whatsapp-link {
+            color: #25D366;
+        }
+        .contact-detail .whatsapp-link:hover {
+            color: #128C7E;
+        }
         .contact-form input,
         .contact-form textarea {
             width: 100%;
@@ -810,6 +859,13 @@
             .cv-content iframe {
                 height: 70vh;
             }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -864,10 +920,22 @@
             .cv-content iframe {
                 height: 60vh;
             }
+            .whatsapp-float {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                bottom: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ========== FLOATING WHATSAPP BUTTON ========== -->
+    <a href="https://wa.me/256708837122?text=Hello%20NABENDE%20DERICK%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- ========== HEADER ========== -->
     <header>
@@ -906,6 +974,9 @@
                     <button onclick="openCV()" class="btn btn-primary" style="background: linear-gradient(135deg, #e94560, #c0392b); box-shadow: 0 8px 25px rgba(233, 69, 96, 0.3);">
                         <i class="fas fa-file-alt"></i> View CV
                     </button>
+                    <a href="https://wa.me/256708837122?text=Hello%20NABENDE%20DERICK%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" class="btn btn-primary btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Me
+                    </a>
                 </div>
             </div>
             <div class="hero-image">
@@ -1171,6 +1242,15 @@
                     <div class="contact-detail">
                         <i class="fas fa-phone-alt"></i>
                         <div><strong>Phone</strong><br>+256 7088 371 122</div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                        <div>
+                            <strong>WhatsApp</strong><br>
+                            <a href="https://wa.me/256708837122?text=Hello%20NABENDE%20DERICK%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" class="whatsapp-link" style="color: #25D366; font-weight: 600;">
+                                <i class="fab fa-whatsapp"></i> +256 7088 371 122
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <form class="contact-form" id="contactForm">
