@@ -215,7 +215,6 @@
             justify-content: center;
             align-items: center;
         }
-        /* ----- PHOTO STYLING (UPDATED) ----- */
         .hero-image .profile-photo {
             width: 380px;
             height: 380px;
@@ -554,7 +553,6 @@
             min-height: 150px;
             resize: vertical;
         }
-        /* Google Map container */
         .map-container {
             margin: 1.5rem 0;
             border-radius: 12px;
@@ -572,7 +570,7 @@
             display: block;
         }
 
-        /* ---------- SUCCESS POPUP OVERLAY ---------- */
+        /* ---------- SUCCESS POPUP ---------- */
         .success-overlay {
             display: none;
             position: fixed;
@@ -649,7 +647,82 @@
             box-shadow: 0 8px 25px rgba(75, 50, 255, 0.4);
         }
 
-        /* Confetti canvas */
+        /* ---------- CV MODAL ---------- */
+        .cv-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 9998;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.4s ease;
+            padding: 20px;
+        }
+        .cv-overlay.show {
+            display: flex;
+        }
+        .cv-modal {
+            background: #fff;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 1100px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+        .cv-modal::-webkit-scrollbar {
+            width: 8px;
+        }
+        .cv-modal::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .cv-modal::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #7b2ffc, #4a9eff);
+            border-radius: 10px;
+        }
+        .cv-close {
+            position: sticky;
+            top: 15px;
+            right: 25px;
+            float: right;
+            background: #e94560;
+            color: #fff;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+        }
+        .cv-close:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: #c0392b;
+        }
+        .cv-content {
+            padding: 10px;
+        }
+        .cv-content iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* ---------- CONFETTI ---------- */
         #confettiCanvas {
             position: fixed;
             top: 0;
@@ -731,6 +804,12 @@
             .hero-buttons {
                 justify-content: center;
             }
+            .cv-modal {
+                max-height: 95vh;
+            }
+            .cv-content iframe {
+                height: 70vh;
+            }
         }
 
         @media (max-width: 768px) {
@@ -775,6 +854,16 @@
             .map-container iframe {
                 height: 150px;
             }
+            .cv-close {
+                top: 10px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .cv-content iframe {
+                height: 60vh;
+            }
         }
     </style>
 </head>
@@ -814,9 +903,9 @@
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">Let's Talk <i class="fas fa-arrow-right"></i></a>
                     <a href="#projects" class="btn btn-outline">View My Work</a>
-                   <a href="NABENDE_DERICK_IT_CV.pdf" target="_blank" class="btn btn-primary">
-    View CV <i class="fas fa-file-pdf"></i>
-</a>
+                    <button onclick="openCV()" class="btn btn-primary" style="background: linear-gradient(135deg, #e94560, #c0392b); box-shadow: 0 8px 25px rgba(233, 69, 96, 0.3);">
+                        <i class="fas fa-file-alt"></i> View CV
+                    </button>
                 </div>
             </div>
             <div class="hero-image">
@@ -1011,7 +1100,7 @@
                 <div class="testimonial-card">
                     <i class="fas fa-quote-right"></i>
                     <p>"Derick implemented a complete network overhaul for our company. His attention to security and detail was outstanding."</p>
-                    <h4> Mukagga Kenneth.</h4>
+                    <h4> Mukaga Kenneth.</h4>
                     <span>CTO, TechVibe Ltd</span>
                 </div>
                 <div class="testimonial-card">
@@ -1076,9 +1165,13 @@
                         <i class="fas fa-map-marked-alt"></i>
                         <div><strong>Find me on Google Maps</strong></div>
                     </div>
-                    <!-- Embedded Google Map -->
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92903.03136471174!2d32.808609563966456!3d1.2364224954273302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177be8ef3a0f7503%3A0xc0a908ea905f9d17!2sKasokwe!5e0!3m2!1sen!2sug!4v1786520219183!5m2!1sen!2sug" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255425.77170565066!2d32.78803945137182!3d0.9473355356301129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177b1e9266a02607%3A0xdecf9b24b29e75ef!2sKayunga%2C%20Uganda!5e0!3m2!1sen!2s!4v1700000000000" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                     <div class="contact-detail">
                         <i class="fas fa-phone-alt"></i>
@@ -1107,7 +1200,243 @@
         </div>
     </div>
 
-    <!-- ========== CONFETTI CANVAS ========== -->
+    <!-- ========== CV MODAL ========== -->
+    <div class="cv-overlay" id="cvOverlay" onclick="closeCVOutside(event)">
+        <div class="cv-modal">
+            <button class="cv-close" onclick="closeCV()">✕</button>
+            <div class="cv-content">
+                <iframe srcdoc="
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>
+                            * { margin:0; padding:0; box-sizing:border-box; }
+                            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #2d3436; line-height: 1.6; padding: 40px 20px; }
+                            .cv-container { max-width: 1100px; margin: 0 auto; background: #ffffff; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); overflow: hidden; }
+                            .header { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); color: #fff; padding: 50px 60px; display: grid; grid-template-columns: 1fr 2.5fr; gap: 40px; align-items: center; }
+                            .profile-image { text-align: center; }
+                            .profile-image .avatar { width: 180px; height: 180px; border-radius: 50%; border: 4px solid #e94560; background: #2d3436; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 80px; color: #e94560; background: rgba(255,255,255,0.05); }
+                            .header-content h1 { font-size: 3rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+                            .header-content .title-role { font-size: 1.3rem; color: #e94560; font-weight: 500; margin-bottom: 15px; }
+                            .header-content .tagline { font-size: 1rem; color: #b2bec3; margin-bottom: 20px; line-height: 1.8; }
+                            .contact-info-header { display: flex; flex-wrap: wrap; gap: 20px 30px; margin-top: 10px; }
+                            .contact-info-header .item { display: flex; align-items: center; gap: 10px; color: #dfe6e9; font-size: 0.95rem; }
+                            .contact-info-header .item i { color: #e94560; font-size: 1.1rem; width: 20px; }
+                            .contact-info-header .item a { color: #dfe6e9; text-decoration: none; }
+                            .contact-info-header .item a:hover { color: #e94560; }
+                            .main-content { display: grid; grid-template-columns: 1fr 2.2fr; gap: 0; }
+                            .sidebar { background: #f8f9fa; padding: 40px 35px; border-right: 1px solid #e9ecef; }
+                            .sidebar-section { margin-bottom: 35px; }
+                            .sidebar-section h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; color: #0f3460; border-bottom: 3px solid #e94560; padding-bottom: 8px; margin-bottom: 18px; font-weight: 700; }
+                            .sidebar-section ul { list-style: none; padding: 0; }
+                            .sidebar-section ul li { padding: 6px 0; padding-left: 25px; position: relative; font-size: 0.95rem; color: #2d3436; }
+                            .sidebar-section ul li::before { content: '▸'; position: absolute; left: 0; color: #e94560; font-weight: bold; }
+                            .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+                            .skill-tags span { background: linear-gradient(135deg, #0f3460, #1a1a2e); color: #fff; padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+                            .sidebar-section .highlight-item { padding: 8px 0; border-bottom: 1px solid #e9ecef; font-size: 0.95rem; }
+                            .sidebar-section .highlight-item:last-child { border-bottom: none; }
+                            .sidebar-section .highlight-item strong { color: #0f3460; display: block; }
+                            .right-content { padding: 40px 45px; background: #ffffff; }
+                            .right-section { margin-bottom: 35px; }
+                            .right-section h3 { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: #0f3460; border-bottom: 3px solid #e94560; padding-bottom: 8px; margin-bottom: 20px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+                            .right-section h3 i { color: #e94560; }
+                            .experience-item { margin-bottom: 25px; padding-left: 5px; border-left: 3px solid #e94560; padding-left: 20px; }
+                            .experience-item .exp-header { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 5px; }
+                            .experience-item .exp-header h4 { font-size: 1.1rem; color: #0f3460; }
+                            .experience-item .exp-header .company { color: #e94560; font-weight: 600; }
+                            .experience-item .exp-header .date { color: #636e72; font-size: 0.85rem; font-weight: 500; }
+                            .experience-item ul { list-style: none; padding: 0; margin-top: 8px; }
+                            .experience-item ul li { padding: 4px 0; padding-left: 22px; position: relative; font-size: 0.95rem; color: #2d3436; }
+                            .experience-item ul li::before { content: '•'; position: absolute; left: 0; color: #e94560; font-weight: bold; font-size: 1.2rem; }
+                            .project-item { background: #f8f9fa; padding: 18px 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #e94560; }
+                            .project-item h4 { color: #0f3460; font-size: 1.05rem; margin-bottom: 4px; }
+                            .project-item .project-role { color: #e94560; font-size: 0.85rem; font-weight: 600; }
+                            .project-item p { font-size: 0.92rem; color: #2d3436; margin: 6px 0; }
+                            .project-item .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+                            .project-item .tech-tags span { background: #0f3460; color: #fff; padding: 2px 12px; border-radius: 15px; font-size: 0.7rem; font-weight: 500; }
+                            .tech-proficiency { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+                            .tech-category { background: #f8f9fa; padding: 15px 18px; border-radius: 10px; }
+                            .tech-category h5 { color: #0f3460; font-size: 0.9rem; margin-bottom: 8px; border-bottom: 1px solid #e9ecef; padding-bottom: 5px; }
+                            .tech-category ul { list-style: none; padding: 0; }
+                            .tech-category ul li { padding: 3px 0; font-size: 0.88rem; color: #2d3436; padding-left: 18px; position: relative; }
+                            .tech-category ul li::before { content: '✓'; position: absolute; left: 0; color: #e94560; font-weight: bold; }
+                            .reference-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+                            .reference-item { background: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center; }
+                            .reference-item strong { color: #0f3460; display: block; font-size: 0.95rem; }
+                            .reference-item span { color: #636e72; font-size: 0.85rem; }
+                            @media (max-width: 992px) {
+                                .header { grid-template-columns: 1fr; text-align: center; padding: 35px 30px; }
+                                .profile-image .avatar { width: 140px; height: 140px; font-size: 60px; }
+                                .contact-info-header { justify-content: center; }
+                                .main-content { grid-template-columns: 1fr; }
+                                .sidebar { border-right: none; border-bottom: 1px solid #e9ecef; }
+                                .reference-grid { grid-template-columns: 1fr 1fr; }
+                            }
+                            @media (max-width: 600px) {
+                                .header-content h1 { font-size: 2rem; }
+                                .right-content { padding: 25px 20px; }
+                                .sidebar { padding: 25px 20px; }
+                                .tech-proficiency { grid-template-columns: 1fr; }
+                                .reference-grid { grid-template-columns: 1fr; }
+                                .experience-item .exp-header { flex-direction: column; }
+                                .contact-info-header { flex-direction: column; align-items: center; gap: 10px; }
+                            }
+                        </style>
+                        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
+                    </head>
+                    <body>
+                        <div class='cv-container'>
+                            <div class='header'>
+                                <div class='profile-image'>
+                                    <div class='avatar'><i class='fas fa-user-circle'></i></div>
+                                </div>
+                                <div class='header-content'>
+                                    <h1>NABENDE DERICK</h1>
+                                    <div class='title-role'>IT Professional | Web & Systems Developer</div>
+                                    <div class='tagline'>Innovative IT professional with expertise in software development, web technologies, networking, and digital solutions. Passionate about leveraging technology to solve real-world problems and drive business efficiency.</div>
+                                    <div class='contact-info-header'>
+                                        <span class='item'><i class='fas fa-phone'></i> 0708 837 122</span>
+                                        <span class='item'><i class='fas fa-envelope'></i> Derickskills76@gmail.com</span>
+                                        <span class='item'><i class='fas fa-map-marker-alt'></i> Kayunga, Uganda</span>
+                                        <span class='item'><i class='fas fa-globe'></i> derickskills76-cyber.github.io</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='main-content'>
+                                <div class='sidebar'>
+                                    <div class='sidebar-section'>
+                                        <h3><i class='fas fa-star' style='color:#e94560; margin-right:8px;'></i> Core Competencies</h3>
+                                        <ul>
+                                            <li>Software & Web Development</li>
+                                            <li>Systems Analysis & Design</li>
+                                            <li>Database Management (MySQL, SQL)</li>
+                                            <li>Networking Systems Support</li>
+                                            <li>UI/UX Design & Prototyping</li>
+                                            <li>Data Analysis & Reporting</li>
+                                            <li>Cyber Security Fundamentals</li>
+                                            <li>IT Support & Troubleshooting</li>
+                                        </ul>
+                                    </div>
+                                    <div class='sidebar-section'>
+                                        <h3><i class='fas fa-tools' style='color:#e94560; margin-right:8px;'></i> Tools & Technologies</h3>
+                                        <div class='skill-tags'>
+                                            <span>VS Code</span><span>Git & GitHub</span><span>Figma</span>
+                                            <span>Adobe Creative Suite</span><span>MySQL Workbench</span>
+                                            <span>phpMyAdmin</span><span>Bootstrap</span><span>Chart.js</span>
+                                            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+                                            <span>PHP</span><span>Python</span><span>Java</span><span>C/C++</span>
+                                        </div>
+                                    </div>
+                                    <div class='sidebar-section'>
+                                        <h3><i class='fas fa-certificate' style='color:#e94560; margin-right:8px;'></i> Certifications</h3>
+                                        <div class='highlight-item'><strong>Information Technology Training</strong><span style='font-size:0.85rem; color:#636e72;'>Limkokwing University</span></div>
+                                        <div class='highlight-item'><strong>Web Development Training</strong><span style='font-size:0.85rem; color:#636e72;'>Professional Certification</span></div>
+                                        <div class='highlight-item'><strong>Database Management Training</strong><span style='font-size:0.85rem; color:#636e72;'>MySQL & SQL</span></div>
+                                        <div class='highlight-item'><strong>Cyber Security Fundamentals</strong><span style='font-size:0.85rem; color:#636e72;'>Core Security Principles</span></div>
+                                    </div>
+                                    <div class='sidebar-section'>
+                                        <h3><i class='fas fa-heart' style='color:#e94560; margin-right:8px;'></i> Professional Interests</h3>
+                                        <ul>
+                                            <li>Software Engineering</li>
+                                            <li>Web Application Development</li>
+                                            <li>Cyber Security</li>
+                                            <li>Networking Infrastructure</li>
+                                            <li>Digital Transformation Solutions</li>
+                                            <li>Cloud Computing</li>
+                                        </ul>
+                                    </div>
+                                    <div class='sidebar-section'>
+                                        <h3><i class='fas fa-trophy' style='color:#e94560; margin-right:8px;'></i> Awards & Recognition</h3>
+                                        <div class='highlight-item'><strong>Bachelor of IT Candidate</strong><span style='font-size:0.85rem; color:#636e72;'>Limkokwing University (2026)</span></div>
+                                    </div>
+                                </div>
+                                <div class='right-content'>
+                                    <div class='right-section'>
+                                        <h3><i class='fas fa-user-tie'></i> Professional Summary</h3>
+                                        <p style='font-size:1rem; color:#2d3436; line-height:1.8;'>Innovative and results-driven <strong>Information Technology professional</strong> with extensive experience in <strong>software development, web technologies, networking systems support, database management, and digital solutions development</strong>. Skilled in designing and implementing technology solutions that improve business operations and service delivery.</p>
+                                        <p style='font-size:1rem; color:#2d3436; line-height:1.8; margin-top:10px;'>Experienced in developing management systems including inventory management solutions, hospital management systems, and other customized software applications. Passionate about solving real-world problems through technology, with strong abilities in programming, system analysis, UI/UX design, and technical support.</p>
+                                    </div>
+                                    <div class='right-section'>
+                                        <h3><i class='fas fa-briefcase'></i> Professional Experience</h3>
+                                        <div class='experience-item'>
+                                            <div class='exp-header'><div><h4>Senior IT Technician / Systems Developer</h4><span class='company'>Electro Commission – Kayunga</span></div><span class='date'>January 2026 – Present</span></div>
+                                            <ul>
+                                                <li>Designed and implemented a <strong>Smart Inventory Management System</strong> to improve stock monitoring, tracking, and operational efficiency.</li>
+                                                <li>Provided technical support, system maintenance, and troubleshooting services to ensure smooth IT operations.</li>
+                                                <li>Developed digital solutions that improved service delivery and reduced manual processes.</li>
+                                                <li>Worked with users to identify system requirements and provide effective technology solutions.</li>
+                                                <li>Managed database structures, system updates, and application improvements.</li>
+                                            </ul>
+                                        </div>
+                                        <div class='experience-item'>
+                                            <div class='exp-header'><div><h4>IT Support & Web Development Projects</h4><span class='company'>Independent Developer</span></div><span class='date'>2024 – Present</span></div>
+                                            <ul>
+                                                <li>Developed responsive websites and web-based applications using modern web technologies.</li>
+                                                <li>Designed and developed management systems including <strong>Hospital Management System</strong>, <strong>Pharmacy Inventory System</strong>, and <strong>Student Management System</strong>.</li>
+                                                <li>Created user-friendly interfaces focused on usability and efficiency.</li>
+                                                <li>Managed databases, application logic, and system documentation.</li>
+                                                <li>Provided technical solutions through programming, networking, and software development.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class='right-section'>
+                                        <h3><i class='fas fa-code'></i> Selected Portfolio Projects</h3>
+                                        <div class='project-item'>
+                                            <h4>🏥 Hospital Management System</h4>
+                                            <div class='project-role'>Role: System Developer</div>
+                                            <p>Integrated hospital management platform that manages patients, appointments, medical records, billing, pharmacy, and hospital operations.</p>
+                                            <div class='tech-tags'><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
+                                        </div>
+                                        <div class='project-item'>
+                                            <h4>📦 Smart Inventory Management System</h4>
+                                            <div class='project-role'>Role: Lead Developer</div>
+                                            <p>Computerized inventory management solution for tracking stock levels, products, sales records, and inventory reports.</p>
+                                            <div class='tech-tags'><span>Database Systems</span><span>Web Technologies</span><span>Programming</span></div>
+                                        </div>
+                                        <div class='project-item'>
+                                            <h4>💊 Pharmacy Inventory Management System</h4>
+                                            <div class='project-role'>Role: System Developer</div>
+                                            <p>Pharmacy management solution for managing medicines, suppliers, stock levels, pricing, and reports.</p>
+                                            <div class='tech-tags'><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PHP</span><span>MySQL</span></div>
+                                        </div>
+                                    </div>
+                                    <div class='right-section'>
+                                        <h3><i class='fas fa-graduation-cap'></i> Education</h3>
+                                        <div style='background:#f8f9fa; padding:18px 20px; border-radius:12px; border-left:4px solid #e94560;'>
+                                            <h4 style='color:#0f3460; font-size:1.1rem;'>Bachelor of Science in Information Technology</h4>
+                                            <p style='color:#e94560; font-weight:600;'>Limkokwing University of Creative Technology – Uganda Campus</p>
+                                            <p style='color:#636e72; font-size:0.9rem;'>Expected Completion: 2026</p>
+                                            <p style='margin-top:8px; font-size:0.95rem; color:#2d3436;'><strong>Relevant Areas:</strong> Software Development, Database Management, Networking, Systems Analysis and Design, Web Development, Cyber Security Fundamentals</p>
+                                        </div>
+                                    </div>
+                                    <div class='right-section'>
+                                        <h3><i class='fas fa-microchip'></i> Technical Proficiency</h3>
+                                        <div class='tech-proficiency'>
+                                            <div class='tech-category'><h5>💻 Programming & Development</h5><ul><li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>PHP</li><li>Python</li><li>Java</li><li>C/C++</li></ul></div>
+                                            <div class='tech-category'><h5>🗄️ Databases</h5><ul><li>MySQL</li><li>SQL</li><li>phpMyAdmin</li><li>MySQL Workbench</li></ul></div>
+                                            <div class='tech-category'><h5>🎨 Design & Development Tools</h5><ul><li>Figma</li><li>Adobe Photoshop</li><li>Adobe Creative Suite</li><li>Visual Studio Code</li><li>GitHub</li></ul></div>
+                                            <div class='tech-category'><h5>🔧 Other Skills</h5><ul><li>Networking Configuration</li><li>Computer Hardware Support</li><li>System Administration</li><li>Technical Documentation</li></ul></div>
+                                        </div>
+                                    </div>
+                                    <div class='right-section'>
+                                        <h3><i class='fas fa-address-card'></i> References</h3>
+                                        <div class='reference-grid'>
+                                            <div class='reference-item'><strong>Walukuli Anarld</strong><span>0748 035 274</span></div>
+                                            <div class='reference-item'><strong>Mutsuma Ivan</strong><span>0753 498 594</span></div>
+                                            <div class='reference-item'><strong>Mukagga Kenneth</strong><span>0751 677 317</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                "></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== CONFETTI ========== -->
     <canvas id="confettiCanvas"></canvas>
 
     <!-- ========== FOOTER ========== -->
@@ -1140,6 +1469,30 @@
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
+        });
+
+        // ---------- CV MODAL ----------
+        function openCV() {
+            document.getElementById('cvOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCV() {
+            document.getElementById('cvOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function closeCVOutside(event) {
+            if (event.target === event.currentTarget) {
+                closeCV();
+            }
+        }
+
+        // Close CV with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCV();
+            }
         });
 
         // ---------- CONFETTI SYSTEM ----------
@@ -1265,7 +1618,6 @@
             }
         }
 
-        // Initialize confetti
         const canvas = document.getElementById('confettiCanvas');
         const confetti = new Confetti(canvas);
 
@@ -1288,7 +1640,6 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Show success popup with confetti
                     document.getElementById('successOverlay').classList.add('show');
                     canvas.classList.add('active');
                     confetti.burst();
@@ -1320,7 +1671,6 @@
             confetti.stop();
         });
 
-        // Close popup when clicking outside
         document.getElementById('successOverlay').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('show');
